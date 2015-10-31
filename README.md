@@ -25,4 +25,4 @@
 Esse script foi inspirado por Mr.Robot (A Série), pois em um ep da primeira temporada, o personagem principal utiliza um script semelhante a este para gerar senhas.
 
 ## Contribuições:
-Eu acredito que todos são bem-vindos a contribuir para este script de qualquer forma. Se você por acaso tiver mais ideias de semelhanças ou caracteres especiais, por favor crie uma issue aqui no github que eu irei adicionar assim que possível.
+Eu acredito que todos são bem-vindos a contribuir para este script de qualquer forma. Se você por acaso tiver mais ideias de semelhanças ou caracteres especiais, por favor crie uma issue/pull request aqui no github que eu irei adicionar assim que possível.
