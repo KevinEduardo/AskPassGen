@@ -24,23 +24,22 @@ __interacoes__ = 10000
 # banner junto com a prinicipal parte do code
 def bannerq():
 	print("########################################################")
-	print("#----------------AskPassGen Beta v1--------------------#")
-	print("#-------------Desenvolvedor: Kevin Souza---------------#")
-	print("#---------------Twitter: @DarthSouza-------------------#")
-	print("#-----------Criado em: 05/09/2015 - 07:05 AM-----------#")
-	print("#---------Atualizado em: 09/09/2015 - 03:53 AM---------#")
+	print("#----------------AskPassGen Beta v2--------------------#")
+	print("#---------Desenvolvedor: Kevin Souza (@DarthSouza)-----#")
+	print("#---------Criado em: 05/09/2015 - 07:05 AM-------------#")
+	print("#---------Atualizado em: 02/11/2015 - 15:24 PM---------#")
 	print("#---------Inspirado por: Mr.Robot (The Series)---------#")
 	print("########################################################")
 	print("")
 	print("")
-	args[1] = int(input("Level de profundidade (0,1,2): "))
+	args[1] = int(input("Level de profundidade (0,1,2,3): "))
 	args[2] = int(input("Level de verbose (0,1,2,3,4): "))
 	print("Digite as informacoes relevantes a vitima:")
 	dadosvit['primeironome'] = input("Primeiro nome: ")
 	dadosvit['meionome'] = input("Nome do meio: ")
 	dadosvit['sobrenome'] = input("Sobrenome: ")
 	dadosvit['qtmovel'] = input("Quantidade de disp. moveis: ")
-	if dadosvit['qtmovel'] == '' or dadosvit['qtmovel'] == 0:
+	if dadosvit['qtmovel'] == '' or dadosvit['qtmovel'] == 0 or dadosvit['qtmovel'] == '0':
 		dadosvit['qtmovel'] = 0
 		dadosvit['ddd'] = '0'
 	else:
@@ -86,13 +85,10 @@ def checarinfo():
 			checagem = checagem + 1
 	return checagem
 
-def semelnome(nome,letrosa,modo): # vai retornar o nome dado com as mudancas, tipo Kevin, ficaria Kevim
+def semelnome(nome,letrosa,modo):
 	nome = nome.lower()
 	letra = letrosa
 	nomenovo = nome
-	# OLD STYLE
-	# if (nomenovo.count('n') > 0) and (qtd = 1):
-	#	nomenovo = nomenovo.replace('n','m')
 	if (modo == 1):
 		nomenovo = nomenovo.replace(nsem[lsem[letra]],semels[nsem[lsem[letra]]])
 	else:
@@ -110,9 +106,6 @@ def qtsemelnome(nome):
 			if nomenovo.count(nsem[num]) == 1:
 				dectsemels.append(nsem[num])
 				mudancas = mudancas + 1
-		# OLD STYLE
-		#if nomenovo.count('n') > 0:
-		#	mudancas = mudancas + 1
 		verbos(3,'Ha ' + str(mudancas) + ' semelhancas entre letras no nome: ' + nome)
 	return mudancas
 
@@ -120,6 +113,10 @@ def looploko(tipo,variavel,nomeamigavel):
 	if tipo == 1: # tipo 1 seria para nomes em geral, sem numeros
 		if variavel.isalpha() == True:
 			verbos(1,"Gerando senhas a partir do " + nomeamigavel + " original...")
+			for ponto in pontuacao:
+				treta = variavel + ponto + "\n"
+				lista.append(treta)
+				verbos(4,'Senha gerada: ' + str(treta))
 			for br in range(__interacoes__):
 				treta = variavel + str(br) + "\n"
 				lista.append(treta)
@@ -135,10 +132,18 @@ def looploko(tipo,variavel,nomeamigavel):
 						lista.append(treta)
 						verbos(4,'Senha gerada: ' + str(treta))
 						if args[1] >= 2:
+							treta =  variavel + ponto + str(br) + "\n"
+							lista.append(treta)
+							verbos(4,'Senha gerada: ' + str(treta))
+						if args[1] >= 3:
 							treta = str(br) + variavel + ponto + "\n"
 							lista.append(treta)
 							verbos(4,'Senha gerada: ' + str(treta))
 			verbos(2,"Gerando senhas a partir do " + nomeamigavel + " original com letras pequenas...")
+			for ponto in pontuacao:
+				treta = variavel.lower() + ponto + "\n"
+				lista.append(treta)
+				verbos(4,'Senha gerada: ' + str(treta))
 			for br in range(__interacoes__):
 				treta = variavel.lower() + str(br) + "\n"
 				lista.append(treta)
@@ -154,6 +159,10 @@ def looploko(tipo,variavel,nomeamigavel):
 						lista.append(treta)
 						verbos(4,'Senha gerada: ' + str(treta))
 						if args[1] >= 2:
+							treta = variavel.lower() + ponto + str(br) + "\n"
+							lista.append(treta)
+							verbos(4,'Senha gerada: ' + str(treta))
+						if args[1] >= 3:
 							treta = str(br) + variavel.lower() + ponto + "\n"
 							lista.append(treta)
 							verbos(4,'Senha gerada: ' + str(treta))
@@ -163,6 +172,10 @@ def looploko(tipo,variavel,nomeamigavel):
 			nomesemel = semelnome(variavel, 0, 2)
 			for algo in dectsemels:
 				nomenovo = semelnome(variavel, algo, 1)
+				for ponto in pontuacao:
+					treta = nomenovo + ponto + "\n"
+					lista.append(treta)
+					verbos(4,'Senha gerada: ' + str(treta))
 				for br in range(__interacoes__):
 					treta = nomenovo + str(br) + "\n"
 					lista.append(treta)
@@ -178,9 +191,17 @@ def looploko(tipo,variavel,nomeamigavel):
 							lista.append(treta)
 							verbos(4,'Senha gerada: ' + str(treta))
 							if args[1] >= 2:
+								treta = nomenovo + ponto + str(br) + "\n"
+								lista.append(treta)
+								verbos(4,'Senha gerada: ' + str(treta))
+							if args[1] >= 3:
 								treta = str(br) + nomenovo + ponto + "\n"
 								lista.append(treta)
 								verbos(4,'Senha gerada: ' + str(treta))
+				for ponto in pontuacao:
+					treta = variavel.lower() + ponto + "\n"
+					lista.append(treta)
+					verbos(4,'Senha gerada: ' + str(treta))
 				for br in range(__interacoes__):
 					treta = nomenovo.lower() + str(br) + "\n"
 					lista.append(treta)
@@ -196,6 +217,10 @@ def looploko(tipo,variavel,nomeamigavel):
 							lista.append(treta)
 							verbos(4,'Senha gerada: ' + str(treta))
 							if args[1] >= 2:
+								treta = nomenovo.lower() + ponto + str(br) + "\n"
+								lista.append(treta)
+								verbos(4,'Senha gerada: ' + str(treta))
+							if args[1] >= 3:
 								treta = str(br) + nomenovo.lower() + ponto + "\n"
 								lista.append(treta)
 								verbos(4,'Senha gerada: ' + str(treta))
@@ -214,6 +239,10 @@ def looploko(tipo,variavel,nomeamigavel):
 						lista.append(treta)
 						verbos(4,'Senha gerada: ' + str(treta))
 						if args[1] >= 2:
+							treta = nomesemel + ponto + str(br) + "\n"
+							lista.append(treta)
+							verbos(4,'Senha gerada: ' + str(treta))
+						if args[1] >= 3:
 							treta = str(br) + nomesemel + ponto + "\n"
 							lista.append(treta)
 							verbos(4,'Senha gerada: ' + str(treta))
@@ -232,6 +261,10 @@ def looploko(tipo,variavel,nomeamigavel):
 						lista.append(treta)
 						verbos(4,'Senha gerada: ' + str(treta))
 						if args[1] >= 2:
+							treta = nomesemel.lower() + ponto + str(br) + "\n"
+							lista.append(treta)
+							verbos(4,'Senha gerada: ' + str(treta))
+						if args[1] >= 3:
 							treta = str(br) + nomesemel.lower() + ponto + "\n"
 							lista.append(treta)
 							verbos(4,'Senha gerada: ' + str(treta))
@@ -239,19 +272,14 @@ def looploko(tipo,variavel,nomeamigavel):
 
 def gerar():
 	verbos(0,'Gerando senhas a partir dos dados fornecidos...')
-	# para o primeiro nome normal
 	looploko(1,dadosvit['primeironome'],"primeiro nome")
 	looploko(2,dadosvit['primeironome'],"primeiro nome")
-	# para o nome do meio
 	looploko(1,dadosvit['meionome'],"nome do meio")
 	looploko(2,dadosvit['meionome'],"nome do meio")
-	# para o sobrenome
 	looploko(1,dadosvit['sobrenome'],"sobrenome")
 	looploko(2,dadosvit['sobrenome'],"sobrenome")
-	# para o nome do primeiro amor
 	looploko(1,dadosvit['pamor'],"nome do primeiro amor")
 	looploko(2,dadosvit['pamor'],"nome do primeiro amor")
-	# para o nome do atual amor
 	looploko(1,dadosvit['aamor'],"nome do atual amor")
 	looploko(2,dadosvit['aamor'],"nome do atual amor")
 	# para o nome de usuario.. precisa ser complementado, eu acho
@@ -296,4 +324,4 @@ def main():
 	gerar()
 	print("Tudo feito. Vlws Flws.")
 
-main() # inicie essa bagaca
+main()
