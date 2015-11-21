@@ -1,13 +1,12 @@
 #!/usr/bin/env python3
 
-# importacoes de bibilhotecas
 import sys
 import os
 import time
 import collections
 import platform
+import argparse
 
-# iniciando as variaveis
 dadosvit = {}
 args = [0,1,2]
 lista = []
@@ -17,41 +16,68 @@ dectsemels = []
 nsem = {i:k for i,k in enumerate(semels.keys())}
 lsem = {k:i for i,k in enumerate(semels.keys())}
 
-# variaveis globais do meu corasaum
-# nao altere essa variavel se vc n manja dos paranaues, e mesmo se manjar, nao recomendo kk
 __interacoes__ = 10000
 
-# banner junto com a prinicipal parte do code
+parser = argparse.ArgumentParser(description='AskPassGen - Made by @DarthSouza - Licensed under the MIT license.')
+parser.add_argument('-l', action='store', dest='profd', help='Level of Depth', default=1, type=int)
+parser.add_argument('-v', action='store', dest="verb", help='Level of Verbose', default=3, type=int)
+parser.add_argument('-firstname', action='store', dest='firstname', help='Target - First Name', type=str)
+parser.add_argument('-middlename', action='store', dest='middlename', help='Target - Middle Name', default="", type=str)
+parser.add_argument('-lastname', action='store', dest='lastname', help='Target - Last Name', type=str)
+parser.add_argument('-ddd', action='store', dest='ddd', help='Target - DDD of phone number', default="")
+parser.add_argument('-phone', action='store', dest='phone', help='Target - Telephone Number', default="")
+parser.add_argument('-username', action='store', dest='username', help='Target - Username', default="")
+parser.add_argument('-firstrelation', action='store', dest='firstrelation', help='Target - First Relationship', default="", type=str)
+parser.add_argument('-actualrelation', action='store', dest='actualrelation', help='Target - Actual Relationship', default="", type=str)
+arglin = parser.parse_args()
+
 def bannerq():
-	print("########################################################")
-	print("#----------------AskPassGen Beta v2--------------------#")
-	print("#---------Desenvolvedor: Kevin Souza (@DarthSouza)-----#")
-	print("#---------Criado em: 05/09/2015 - 07:05 AM-------------#")
-	print("#---------Atualizado em: 02/11/2015 - 15:24 PM---------#")
-	print("#---------Inspirado por: Mr.Robot (The Series)---------#")
-	print("########################################################")
-	print("")
-	print("")
-	args[1] = int(input("Level de profundidade (0,1,2,3): "))
-	args[2] = int(input("Level de verbose (0,1,2,3,4): "))
-	print("Digite as informacoes relevantes a vitima:")
-	dadosvit['primeironome'] = input("Primeiro nome: ")
-	dadosvit['meionome'] = input("Nome do meio: ")
-	dadosvit['sobrenome'] = input("Sobrenome: ")
-	dadosvit['qtmovel'] = input("Quantidade de disp. moveis: ")
-	if dadosvit['qtmovel'] == '' or dadosvit['qtmovel'] == 0 or dadosvit['qtmovel'] == '0':
-		dadosvit['qtmovel'] = 0
-		dadosvit['ddd'] = '0'
+	if bool(arglin.firstname) == True and bool(arglin.lastname) == True:
+		args[1] = arglin.profd
+		args[2] = arglin.verb
+		dadosvit['primeironome'] = arglin.firstname
+		dadosvit['meionome'] = arglin.middlename
+		dadosvit['sobrenome'] = arglin.lastname
+		dadosvit['ddd'] = arglin.ddd
+		dadosvit['celular'] = [arglin.phone]
+		dadosvit['username'] = arglin.username
+		dadosvit['pamor'] = arglin.firstrelation
+		dadosvit['aamor'] = arglin.actualrelation
 	else:
-		dadosvit['qtmovel'] = int(dadosvit['qtmovel'])
-		dadosvit['ddd'] = input("DDD dos telefones: ") 
-	dadosvit['celular'] = []
-	for quantidade in range(dadosvit['qtmovel']):
-		dadosvit['celular'].append(input("Numero de celular #" + str(quantidade + 1) + ": ")) # sem DDD
-	dadosvit['username'] = input("Nome de usuario: ") # em breve, fazer com seja possivel add mais de um
-	dadosvit['pamor'] = input("Nome do primeiro namoro/amor: ") # pode parecer irrelevante, mas se tratando de senhas, nada e impossivel
-	dadosvit['aamor'] = input("Nome do atual namoro/amor: ") # pode parecer irrelevante, mas se tratando de senhas, nada e impossivel
+		print("########################################################")
+		print("#----------------AskPassGen Beta v3--------------------#")
+		print("#---------Desenvolvedor: Kevin Souza (@DarthSouza)-----#")
+		print("#---------Criado em: 05/09/2015 - 07:05 AM-------------#")
+		print("#---------Atualizado em: 06/11/2015 - 07:04 PM---------#")
+		print("#---------Inspirado por: Mr.Robot (The Series)---------#")
+		print("########################################################")
+		print("")
+		print("")
+		args[1] = input("Level de profundidade (0,1,2,3): ")
+		args[2] = input("Level de verbose (0,1,2,3,4): ")
+		if args[1] == "" or args[1] == "0" or args[1] == 0:
+			args[1] = arglin.profd
+		if args[2] == "" or args[2] == "0" or args[2] == 0:
+			args[2] = arglin.verb
+		print("Digite as informacoes relevantes a vitima:")
+		dadosvit['primeironome'] = input("Primeiro nome: ")
+		dadosvit['meionome'] = input("Nome do meio: ")
+		dadosvit['sobrenome'] = input("Sobrenome: ")
+		dadosvit['qtmovel'] = input("Quantidade de disp. moveis: ")
+		if dadosvit['qtmovel'] == '' or dadosvit['qtmovel'] == 0 or dadosvit['qtmovel'] == '0':
+			dadosvit['qtmovel'] = 0
+			dadosvit['ddd'] = '0'
+		else:
+			dadosvit['qtmovel'] = int(dadosvit['qtmovel'])
+			dadosvit['ddd'] = input("DDD dos telefones: ")
+			dadosvit['celular'] = []
+			for quantidade in range(dadosvit['qtmovel']):
+				dadosvit['celular'].append(input("Numero de celular #" + str(quantidade + 1) + ": ")) # sem DDD
+		dadosvit['username'] = input("Nome de usuario: ")
+		dadosvit['pamor'] = input("Nome do primeiro namoro/amor: ")
+		dadosvit['aamor'] = input("Nome do atual namoro/amor: ")
 	if checarinfo() <= 0:
+		limpatela()
 		print('Nenhuma informacao foi fornecida. Mano, ce tem demencia?')
 		time.sleep(5)
 		sys.exit(0)
@@ -62,7 +88,6 @@ def verbos(level,mensagem):
 	elif args[2] == level:
 		print(mensagem)
 
-# funcoes da zuera
 def arquivar(nomedoarquivo,texto):
 	name = nomedoarquivo +'.txt'
 
@@ -76,7 +101,6 @@ def arquivar(nomedoarquivo,texto):
 		time.sleep(3)
 		sys.exit(0)
 
-# vamos checar os parametros
 def checarinfo():
 	verbos(2,'Verificando informacoes fornecidas...')
 	checagem = 0
@@ -125,7 +149,6 @@ def looploko(tipo,variavel,nomeamigavel):
 					treta = str(br) + variavel + "\n"
 					lista.append(treta)
 					verbos(4,'Senha gerada: ' + str(treta))
-				# testanu algo
 				if args[1] >= 1:
 					for ponto in pontuacao:
 						treta = variavel + str(br) + ponto + "\n"
@@ -152,7 +175,6 @@ def looploko(tipo,variavel,nomeamigavel):
 					treta = str(br) + variavel.lower() + "\n"
 					lista.append(treta)
 					verbos(4,'Senha gerada: ' + str(treta))
-				# testanu algo
 				if args[1] >= 1:
 					for ponto in pontuacao:
 						treta = variavel.lower() + str(br) + ponto + "\n"
@@ -184,7 +206,6 @@ def looploko(tipo,variavel,nomeamigavel):
 						treta = str(br) + nomenovo + "\n"
 						lista.append(treta)
 						verbos(4,'Senha gerada: ' + str(treta))
-					# testanu algo
 					if args[1] >= 1:
 						for ponto in pontuacao:
 							treta = nomenovo + str(br) + ponto + "\n"
@@ -210,7 +231,6 @@ def looploko(tipo,variavel,nomeamigavel):
 						treta = str(br) + nomenovo.lower() + "\n"
 						lista.append(treta)
 						verbos(4,'Senha gerada: ' + str(treta))
-					# testanu algo
 					if args[1] >= 1:
 						for ponto in pontuacao:
 							treta = nomenovo.lower() + str(br) + ponto + "\n"
@@ -232,7 +252,6 @@ def looploko(tipo,variavel,nomeamigavel):
 					treta = str(br) + nomesemel + "\n"
 					lista.append(treta)
 					verbos(4,'Senha gerada: ' + str(treta))
-				# testanu algo
 				if args[1] >= 1:
 					for ponto in pontuacao:
 						treta = nomesemel + str(br) + ponto + "\n"
@@ -254,7 +273,6 @@ def looploko(tipo,variavel,nomeamigavel):
 					treta = str(br) + nomesemel.lower() + "\n"
 					lista.append(treta)
 					verbos(4,'Senha gerada: ' + str(treta))
-				# testanu algo
 				if args[1] >= 1:
 					for ponto in pontuacao:
 						treta = nomesemel.lower() + str(br) + ponto + "\n"
@@ -269,7 +287,6 @@ def looploko(tipo,variavel,nomeamigavel):
 							lista.append(treta)
 							verbos(4,'Senha gerada: ' + str(treta))
 
-
 def gerar():
 	verbos(0,'Gerando senhas a partir dos dados fornecidos...')
 	looploko(1,dadosvit['primeironome'],"primeiro nome")
@@ -282,22 +299,17 @@ def gerar():
 	looploko(2,dadosvit['pamor'],"nome do primeiro amor")
 	looploko(1,dadosvit['aamor'],"nome do atual amor")
 	looploko(2,dadosvit['aamor'],"nome do atual amor")
-	# para o nome de usuario.. precisa ser complementado, eu acho
 	if dadosvit['username'].isalnum() == True:
 		verbos(1,"Gerando senhas a partir do nome de usuario (username)...")
 		for br in range(__interacoes__):
 			treta = dadosvit['username'] + str(br) + "\n"
 			lista.append(treta)
 			verbos(4,'Senha gerada: ' + str(treta))
-	# para o celular e telefone
-	if dadosvit['ddd'].isnumeric() == True and int(dadosvit['ddd']) != 0:
+	if bool(dadosvit['celular'][0]) == True:
 		verbos(2,"Gerando senhas a partir do(s) celular(s)/telefone(s)...")
 		for dispmovel in dadosvit['celular']:
 			indicecel = dadosvit['celular'].index(dispmovel)
 			if dadosvit['celular'][indicecel].isnumeric() == True:
-				treta = dadosvit['ddd'] + dadosvit['celular'][indicecel] + "\n"
-				lista.append(treta)
-				verbos(4,'Senha gerada: ' + str(treta))
 				treta = dadosvit['celular'][indicecel] + "\n"
 				lista.append(treta)
 				verbos(4,'Senha gerada: ' + str(treta))
