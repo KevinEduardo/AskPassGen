@@ -12,7 +12,7 @@
 3. Gera as senhas também se baseando nas semelhanças.
 4. Gera as senhas com caracteres especiais também.
 5. Gera senhas com padrões utilizidos comumente por pessoas. (os padrões foram recolhidos atráves de um estudo privado)
-6. **(EM BREVE)** Possibilidade de usar argumentos de linha de comando.
+6. **(LANÇADO - PROMESSA FEITA É PROMESSA CUMPRIDA)** Possibilidade de usar argumentos de linha de comando.
 7. **(EM BREVE/TALVEZ/POSSIVELMENTE)** Possibilidade de retirar as informações automaticamente do facebook do alvo.
 
 ## Requisitos:
