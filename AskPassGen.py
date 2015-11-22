@@ -48,7 +48,6 @@ def bannerq():
 		print("#----------------AskPassGen Beta v3--------------------#")
 		print("#---------Desenvolvedor: Kevin Souza (@DarthSouza)-----#")
 		print("#---------Criado em: 05/09/2015 - 07:05 AM-------------#")
-		print("#---------Atualizado em: 06/11/2015 - 07:04 PM---------#")
 		print("#---------Inspirado por: Mr.Robot (The Series)---------#")
 		print("########################################################")
 		print("")
