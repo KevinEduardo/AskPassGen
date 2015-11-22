@@ -50,8 +50,8 @@ def bannerq():
 		print("########################################################")
 		print("")
 		print("")
-		args[1] = input("Level of Depth (0,1,2,3): ")
-		args[2] = input("Level of Verbose (0,1,2,3,4): ")
+		args[1] = int(input("Level of Depth (0,1,2,3): "))
+		args[2] = int(input("Level of Verbose (0,1,2,3,4): "))
 		if args[1] == "" or args[1] == "0" or args[1] == 0:
 			args[1] = arglin.profd
 		if args[2] == "" or args[2] == "0" or args[2] == 0:
@@ -71,7 +71,7 @@ def bannerq():
 		dadosvit['username'] = input("Username: ")
 		dadosvit['pamor'] = input("First relationship partner's name: ")
 		dadosvit['aamor'] = input("Actual relationship partner's name: ")
-	if checarinfo() <= 2:
+	if checarinfo() < 2:
 		limpatela()
 		print('Are you on drugs? You did not provided any information. Dumb ass.')
 		time.sleep(5)
@@ -120,12 +120,12 @@ def qtsemelnome(nome):
 	nomenovo = nome.lower()
 	mudancas = 0
 	if len(nome) >= 1 and nome.isalnum() == True:
-		verbos(3,'Detecting semel-letters on the name: ' + nome)
+		verbos(3,'Detecting similar letters on the name: ' + nome)
 		for num in nsem:
 			if nomenovo.count(nsem[num]) == 1:
 				dectsemels.append(nsem[num])
 				mudancas = mudancas + 1
-		verbos(3,'There is ' + str(mudancas) + ' semel-letters on the name: ' + nome)
+		verbos(3,'There is ' + str(mudancas) + ' similar letters on the name: ' + nome)
 	return mudancas
 
 def looploko(tipo,variavel,nomeamigavel):
@@ -185,7 +185,7 @@ def looploko(tipo,variavel,nomeamigavel):
 							verbos(4,'Generated password: ' + str(treta))
 	if tipo == 2: #tipo 2 e pra similaridades
 		if qtsemelnome(variavel) > 0 and variavel.isalpha() == True:
-			verbos(1,"Generating passwords from the " + nomeamigavel + " with the semel-letters replaced...")
+			verbos(1,"Generating passwords from the " + nomeamigavel + " with the similar letters replaced...")
 			nomesemel = semelnome(variavel, 0, 2)
 			for algo in dectsemels:
 				nomenovo = semelnome(variavel, algo, 1)
