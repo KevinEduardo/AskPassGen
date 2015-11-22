@@ -76,7 +76,7 @@ def bannerq():
 		dadosvit['username'] = input("Nome de usuario: ")
 		dadosvit['pamor'] = input("Nome do primeiro namoro/amor: ")
 		dadosvit['aamor'] = input("Nome do atual namoro/amor: ")
-	if checarinfo() <= 0:
+	if checarinfo() < 2:
 		limpatela()
 		print('Nenhuma informacao foi fornecida. Mano, ce tem demencia?')
 		time.sleep(5)
