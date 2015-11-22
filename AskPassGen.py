@@ -48,13 +48,13 @@ def bannerq():
 		print("#----------------AskPassGen Beta v3--------------------#")
 		print("#---------Desenvolvedor: Kevin Souza (@DarthSouza)-----#")
 		print("#---------Criado em: 05/09/2015 - 07:05 AM-------------#")
-		print("#---------Atualizado em: 21/11/2015 - 07:47 PM---------#")
+		print("#---------Atualizado em: 06/11/2015 - 07:04 PM---------#")
 		print("#---------Inspirado por: Mr.Robot (The Series)---------#")
 		print("########################################################")
 		print("")
 		print("")
-		args[1] = input("Level de profundidade (0,1,2,3): ")
-		args[2] = input("Level de verbose (0,1,2,3,4): ")
+		args[1] = int(input("Level de profundidade (0,1,2,3): "))
+		args[2] = int(input("Level de verbose (0,1,2,3,4): "))
 		if args[1] == "" or args[1] == "0" or args[1] == 0:
 			args[1] = arglin.profd
 		if args[2] == "" or args[2] == "0" or args[2] == 0:
@@ -305,7 +305,7 @@ def gerar():
 			treta = dadosvit['username'] + str(br) + "\n"
 			lista.append(treta)
 			verbos(4,'Senha gerada: ' + str(treta))
-	if bool(dadosvit['celular'][0]) == True:
+	if bool(dadosvit['qtmovel']) == True:
 		verbos(2,"Gerando senhas a partir do(s) celular(s)/telefone(s)...")
 		for dispmovel in dadosvit['celular']:
 			indicecel = dadosvit['celular'].index(dispmovel)
