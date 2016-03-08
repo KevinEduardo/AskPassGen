@@ -312,6 +312,9 @@ def gerar():
 				treta = dadosvit['celular'][indicecel] + "\n"
 				lista.append(treta)
 				verbos(4,'Senha gerada: ' + str(treta))
+				treta2 = dadosvit['celular'][indicecel][::-1] + "\n"
+				lista.append(treta2)
+				verbos(4,'Senha gerada: ' + str(treta2))
 	if dadosvit['primeironome'].isalpha() == True:
 		verbos(3,'Gerando nome do arquivo...')
 		nomefile = dadosvit['primeironome'].lower()
